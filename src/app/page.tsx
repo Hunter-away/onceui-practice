@@ -2,8 +2,10 @@
 
 import React from 'react';
 
-import { Heading, Text, Flex, Button, Grid, Icon, InlineCode, Logo, LetterFx, Arrow } from '@/once-ui/components';
+import { Heading, Text, Flex, Button, Grid, Icon, InlineCode, Logo, LetterFx, Arrow, RevealFx } from '@/once-ui/components';
 import Link from 'next/link';
+
+import { MenuList } from '@/components/menuList';
 
 export default function Home() {
 	const links = [
@@ -25,118 +27,42 @@ export default function Home() {
 	];
 
 	return (
+		<>
 		<Flex
-			fillWidth paddingTop="l" paddingX="l"
+			fillWidth paddingBottom="xl" paddingX="l"
 			direction="column" alignItems="center" flex={1}>
 			<Flex
 				position="relative"
 				as="section" overflow="hidden"
 				fillWidth minHeight="0" maxWidth={68}
-				direction="column" alignItems="center" flex={1}>
+				direction="column" alignItems="center" justifyContent="center" flex={1}>
+				<RevealFx
+					speed="medium"
+					delay={0}
+					translateY={4}
+				>
 				<Flex
 					as="main"
-					direction="column" justifyContent="center"
-					fillWidth fillHeight padding="l" gap="l">
-					<Flex
-						mobileDirection="column"
-						fillWidth gap="24">
-						<Flex
-							position="relative"
-							flex={2} paddingTop="56" paddingX="xl">
-							<Logo size="xl" icon={false} style={{zIndex: '1'}} href="https://once-ui.com"/>
-						</Flex>
-						<Flex
-							position="relative"
-							flex={4} gap="24" marginBottom="104"
-							direction="column">
-							<InlineCode
-								className="shadow-m"
-								style={{
-									width: 'fit-content',
-									padding: 'var(--static-space-8) var(--static-space-16)',
-									backdropFilter: 'blur(var(--static-space-1))'}}>
-								Start by editing <span className="brand-on-background-medium">app/page.tsx</span>
-							</InlineCode>
-							<Heading
-								wrap="balance"
-								variant="display-strong-s">
-								<span className="font-code">
-									<LetterFx
-										trigger="instant">
-										Helping designers code and developers design
-									</LetterFx>
-								</span>
-							</Heading>
-							<Button
-								id="readDocs"
-								href="https://once-ui.com/docs"
-								variant="secondary">
-								<Flex alignItems="center">
-									Read docs
-									<Arrow trigger="#readDocs"/>
-								</Flex>
-							</Button>
-						</Flex>
+					direction="column" alignItems="center" justifyContent="center"
+					fillWidth fillHeight>
+						<Heading
+							wrap="balance"
+							variant="display-strong-m">
+								{/* <LetterFx
+									trigger="instant"> */}
+									My Site is Developing ...
+								{/* </LetterFx> */}
+						</Heading>
+						<Text paddingTop='l'>I'm trying my best to make this site better.</Text>
+						<Text>I will be back soon.</Text>
 					</Flex>
-					<Grid
-						radius="l"
-						border="neutral-medium"
-						borderStyle="solid-1"
-						columns="repeat(3, 1fr)"
-						tabletColumns="1col"
-						mobileColumns="1col"
-						fillWidth>
-						{links.map((link) => (
-							<Link
-								target="_blank"
-								style={{ padding: 'var(--responsive-space-l)' }}
-								key={link.href}
-								href={link.href}>
-								<Flex
-									fillWidth paddingY="8" gap="8"
-									direction="column">
-									<Flex
-										fillWidth gap="12"
-										alignItems="center">
-										<Text
-											variant="body-strong-m" onBackground="neutral-strong">
-											{link.title}
-										</Text>
-										<Icon size="s" name="arrowUpRight" />
-									</Flex>
-									<Text
-										variant="body-default-s" onBackground="neutral-weak">
-										{link.description}
-									</Text>
-								</Flex>
-							</Link>
-						))}
-					</Grid>
-				</Flex>
+				</RevealFx>
 			</Flex>
-			<Flex
-				as="footer"
-				position="relative"
-				fillWidth paddingX="l" paddingY="m"
-				justifyContent="space-between">
-				<Text
-					variant="body-default-s" onBackground="neutral-weak">
-					© 2024 Once UI, <Link href="https://github.com/once-ui-system/nextjs-starter?tab=MIT-1-ov-file">MIT License</Link>
-				</Text>
-				<Flex
-					gap="12">
-					<Button
-						href="https://github.com/once-ui-system/nextjs-starter"
-						prefixIcon="github" size="s" variant="tertiary">
-						GitHub
-					</Button>
-					<Button
-						href="https://discord.com/invite/5EyAQ4eNdS"
-						prefixIcon="discord" size="s" variant="tertiary">
-						Discord
-					</Button>
-				</Flex>
-			</Flex>
+		
 		</Flex>
+		<Flex fillWidth direction="row"	alignItems="center" justifyContent="center" paddingBottom="l">
+			<MenuList />
+		</Flex>
+		</>
 	);
 }

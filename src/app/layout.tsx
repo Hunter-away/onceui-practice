@@ -1,3 +1,4 @@
+"use client"
 import "@/once-ui/styles/index.scss";
 import "@/once-ui/tokens/index.scss";
 
@@ -11,6 +12,7 @@ import { Background, Flex } from '@/once-ui/components'
 
 import { Inter } from 'next/font/google'
 import { Roboto_Mono } from 'next/font/google';
+import { useState } from "react";
 
 const primary = Inter({
 	variable: '--font-primary',
@@ -37,34 +39,34 @@ const tertiary: FontConfig | undefined = undefined;
 /*
 */
 
-export async function generateMetadata(): Promise<Metadata> {
-	const host = (await headers()).get("host");
-	const metadataBase = host ? new URL(`https://${host}`) : undefined;
+// export async function generateMetadata(): Promise<Metadata> {
+// 	const host = (await headers()).get("host");
+// 	const metadataBase = host ? new URL(`https://${host}`) : undefined;
 
-	return {
-		title: meta.title,
-		description: meta.description,
-		openGraph: {
-			title: og.title,
-			description: og.description,
-			url: 'https://' + baseURL,
-			type: og.type as
-				| "website"
-				| "article"
-				| "book"
-				| "profile"
-				| "music.song"
-				| "music.album"
-				| "music.playlist"
-				| "music.radio_station"
-				| "video.movie"
-				| "video.episode"
-				| "video.tv_show"
-				| "video.other",
-		},
-		metadataBase,
-	};
-}
+// 	return {
+// 		title: meta.title,
+// 		description: meta.description,
+// 		openGraph: {
+// 			title: og.title,
+// 			description: og.description,
+// 			url: 'https://' + baseURL,
+// 			type: og.type as
+// 				| "website"
+// 				| "article"
+// 				| "book"
+// 				| "profile"
+// 				| "music.song"
+// 				| "music.album"
+// 				| "music.playlist"
+// 				| "music.radio_station"
+// 				| "video.movie"
+// 				| "video.episode"
+// 				| "video.tv_show"
+// 				| "video.other",
+// 		},
+// 		metadataBase,
+// 	};
+// }
 
 const schemaData = {
 	"@context": "https://schema.org",
@@ -82,12 +84,17 @@ export default function RootLayout({
 }: Readonly<{
   	children: React.ReactNode;
 }>) {
+	const [theme, setTheme] = useState<'light' | 'dark'>('light')
+	const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light')
+    // style.theme = 'light'
+  }
 	return (
 		<Flex
 			as="html" lang="en"
 			fillHeight background="page"
 			data-neutral={style.neutral} data-brand={style.brand} data-accent={style.accent}
-			data-border={style.border} data-theme={style.theme}
+			data-border={style.border} data-theme={theme}
 			data-solid={style.solid} data-solid-style={style.solidStyle}
 			data-surface={style.surface} data-transition={style.transition}
 			data-scaling={style.scaling}
@@ -118,6 +125,14 @@ export default function RootLayout({
 						display: true,
 						opacity: 0.4,
 					}}/>
+					<button
+						onClick={toggleTheme}
+						className={`mb-4 px-4 py-2 rounded ${
+							theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-gray-200 text-black'
+						}`}
+					>
+						Toggle {theme === 'light' ? 'Dark' : 'Light'} Mode
+					</button>
 				<Flex
 					flex={1} direction="column">
 					{children}
