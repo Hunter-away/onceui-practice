@@ -8,7 +8,7 @@ import { Metadata } from "next";
 
 import { baseURL, style, meta, og, schema, social } from "@/once-ui/resources/config"
 
-import { Background, Flex } from '@/once-ui/components'
+import { Background, Flex, IconButton } from '@/once-ui/components'
 
 import { Inter } from 'next/font/google'
 import { Roboto_Mono } from 'next/font/google';
@@ -125,14 +125,14 @@ export default function RootLayout({
 						display: true,
 						opacity: 0.4,
 					}}/>
-					<button
+					<IconButton
 						onClick={toggleTheme}
-						className={`mb-4 px-4 py-2 rounded ${
-							theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-gray-200 text-black'
-						}`}
-					>
-						Toggle {theme === 'light' ? 'Dark' : 'Light'} Mode
-					</button>
+						icon="refresh"
+						size="m"
+						tooltip="Tooltip"
+						tooltipPosition="top"
+						variant="primary"
+					></IconButton>
 				<Flex
 					flex={1} direction="column">
 					{children}

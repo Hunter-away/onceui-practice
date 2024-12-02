@@ -7,30 +7,30 @@ date: '2023-01-01'
 
 # 源码下载
 源码地址：https://github.com/lgd8981289/vue-next-3.2.37
-```sh
+```bash
 git clone git@github.com:lgd8981289/vue-next-3.2.37.git
 ```
 克隆到本地之后，安装依赖包，vue3的包管理器是pnpm，这里我们也安装pnpm，安装多少版本呢？
 我们可以看到在项目的`package.json`里面：
-```sh
+```bash
 "packageManager": "pnpm@7.1.0"
 ```
 那我们也安装这个版本
-```sh
+```bash
 npm i -g pnpm@7.1.0
 ```
 `注意`：这里需要我们的node版本 `>=16.11.0`，版本不一致请自行更换
 
 安装完成之后，需要安装相关依赖，执行`pnpm i`，等待执行结果：
-```sh
+```bash
 pnpm i
 ```
 依赖安装完成之后，我们需要进行打包
-```sh
+```bash
 npm run build
 ```
 但是我们是需要进行源码阅读，肯定需要代码调试我们才能更好的理解源码，也就需要把源码暴露出来，需要用到sourceMap，怎么使用呢，我们看源码，在`package.json`里面：
-```sh
+```json
     ...
   "scripts": {
     "dev": "node scripts/dev.js",
@@ -66,7 +66,7 @@ await execa(
   )
 ```
 我们可以看到首先获取到我们执行命令时的参数，然后判断参数是否存在，存在的话就在打包的时候执行`SOURCE_MAP:true`，我们可以看到参数来自`const sourceMap = args.sourcemap || args.s`，所以我们传`sourcemap`以及`s`都是ok的，所以最后需要修改`package.json`里面：
-```sh
+```json
     ...
   "scripts": {
 <!-- more -->
